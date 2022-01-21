@@ -63,10 +63,13 @@ public class UsuarioController {
 
     @PostMapping("api/login")
     public ResponseEntity<Usuario> login(@RequestBody Usuario usuario){
+        System.out.println(usuario.getEmail());
         if (usuarioService.login(usuario.getEmail(), usuario.getPassword())){
+            System.out.println("Se ha iniciado session correctamente!");
             return ResponseEntity.ok(usuario);
         }
-        return ResponseEntity.badRequest().build();
+        System.out.println("Las Credenciales son incorrectas");
+        return ResponseEntity.notFound().build();
     }
 }
 
